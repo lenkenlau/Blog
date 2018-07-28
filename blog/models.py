@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+
+
 # from django.utils.six import python_2_unicode_compatible
 
 
@@ -20,6 +22,7 @@ class Category(models.Model):
     def __str__(self):
         return self.name
 
+
 class Tag(models.Model):
     """
     标签 Tag 也比较简单，和 Category 一样。
@@ -29,6 +32,7 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Post(models.Model):
     # 文章标题
@@ -62,6 +66,9 @@ class Post(models.Model):
     # 因为我们规定一篇文章只能有一个作者，而一个作者可能会写多篇文章，因此这是一对多的关联关系，和 Category 类似。
     author = models.ForeignKey(User)
 
+    # 新增 views 字段记录阅读量
+    views = models.PositiveIntegerField(default=0)
+
     def __str__(self):
         return self.title
 
@@ -69,6 +76,10 @@ class Post(models.Model):
         # 从django.urls 引入的 reverse 函数会去解析这个视图函数对应的 URL
         # 也就是说：会把pk这个值，代入到 blog/urls.py 中，name=detail 的URL中去。
         return reverse('blog:detail', kwargs={'pk': self.pk})
+
+    def increase_views(self):
+        self.views += 1
+        self.save(update_fields=['views'])  # 更新数据库中的 views 字段
 
     class Meta:
         ordering = ['-created_time']
