@@ -19,7 +19,7 @@ curtsies==0.3.0
 cycler==0.10.0
 decorator==4.3.0
 descartes==1.1.0
-Django==1.11.8
+Django==1.11.29
 django-appconf==1.0.2
 django-model-utils==3.1.2
 django-user==0.2.1
