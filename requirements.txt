@@ -40,7 +40,7 @@ lxml==4.2.0
 Markdown==2.6.11
 matplotlib==2.2.0
 munch==2.2.0
-numpy==1.14.1
+numpy==1.22.0
 pandas==0.22.0
 parsel==1.4.0
 parso==0.2.1
